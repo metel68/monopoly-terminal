@@ -1,0 +1,17 @@
+.cubes-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.cube {
+  border: 1px dotted black;
+  font-family: monospace;
+  font-size: 64px;
+  font-weight: bold;
+}
+
+.double {
+  color: darkred;
+}

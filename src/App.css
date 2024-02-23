@@ -1,38 +1,40 @@
-.App {
-  text-align: center;
-}
+.app {
+  width: 100%;
+  height: 100vh;
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+button {
+  font-size: 18px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.grid {
+  flex: 1;
+
+  display: grid;
+  grid-template-columns: 0.8fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 0.8fr;
+  gap: 0 0;
+  grid-template-areas:
+    "Players Log Log"
+    "Players Log Log"
+    "Bank Bank Bank";
+}
+
+.players {
+  grid-area: Players;
+  border: 1px solid gray;
+}
+
+.cubes {
+  grid-area: Bank;
+  border: 1px solid gray;
+  padding: 16px;
+}
+
+.log {
+  grid-area: Log;
+  border: 1px solid gray;
+  padding: 16px;
 }

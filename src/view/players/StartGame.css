@@ -1,0 +1,9 @@
+.start {
+  padding: 0 16px;
+}
+
+.start-block {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
