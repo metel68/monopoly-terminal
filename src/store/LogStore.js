@@ -1,4 +1,5 @@
 import { makeAutoObservable } from "mobx";
+import { Actions } from "../consts/Actions";
 
 export class LogStore {
   logArray = [];
@@ -9,7 +10,7 @@ export class LogStore {
 
   logAddMoney(player, amount) {
     this.logArray.push({
-      type: 'add',
+      type: Actions.ADD,
       player: Object.assign({}, player),
       amount,
     });
@@ -17,7 +18,7 @@ export class LogStore {
 
   logSendMoney(player, amount) {
     this.logArray.push({
-      type: 'send',
+      type: Actions.SEND,
       player: Object.assign({}, player),
       amount,
     });
@@ -25,8 +26,15 @@ export class LogStore {
 
   logRemoveMoney(player, amount) {
     this.logArray.push({
-      type: 'remove',
+      type: Actions.REMOVE,
       player: Object.assign({}, player),
+      amount,
+    });
+  }
+
+  logUndo(amount) {
+    this.logArray.push({
+      type: Actions.UNDO,
       amount,
     });
   }

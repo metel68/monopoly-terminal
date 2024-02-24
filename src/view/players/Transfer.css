@@ -1,0 +1,8 @@
+.transfer-block {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  margin: 16px;
+  gap: 12px;
+}

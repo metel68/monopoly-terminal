@@ -7,8 +7,8 @@ const { format } = Intl.NumberFormat();
 
 export const Player = observer(({ playerStore, id, player, active }) => {
   const onAddMoney = useCallback(() => {
-    if (playerStore.buffer > 0) {
-      playerStore.addMoney(id, playerStore.buffer);
+    if (playerStore.amountToTransfer > 0) {
+      playerStore.addMoney(id, playerStore.amountToTransfer);
 
       return;
     }
@@ -20,7 +20,7 @@ export const Player = observer(({ playerStore, id, player, active }) => {
     }
   }, [id, playerStore, player]);
 
-  const onSendMoney =  useCallback(() => {
+  const onSendMoney = useCallback(() => {
     const amount = prompt(`Сколько перевести от игрока ${player.name}?`);
 
     if (amount) {
@@ -28,11 +28,20 @@ export const Player = observer(({ playerStore, id, player, active }) => {
     }
   }, [id, playerStore, player]);
 
-  const onRemoveMoney =  useCallback(() => {
+  const onRemoveMoney = useCallback(() => {
     const amount = prompt(`Сколько списать у игрока ${player.name}?`);
 
     if (amount) {
       playerStore.removeMoney(id, Number.parseInt(amount));
+    }
+  }, [id, playerStore, player]);
+
+  const onFuckup = useCallback(() => {
+    // eslint-disable-next-line no-restricted-globals
+    const trigger = confirm(`Действительно объявить игрока ${player.name} банкротом?`);
+
+    if (trigger) {
+      playerStore.bankruptPlayer(id);
     }
   }, [id, playerStore, player]);
 
@@ -48,8 +57,10 @@ export const Player = observer(({ playerStore, id, player, active }) => {
 
     <div className="buttons">
       <button onClick={onAddMoney}>+</button>
-      <button onClick={onSendMoney}>П</button>
-      <button onClick={onRemoveMoney}>-</button>
+      {player.balance > 0 ? <>
+        <button onClick={onSendMoney}>П</button>
+        <button onClick={onRemoveMoney}>-</button>
+      </> : <button onClick={onFuckup}>ОЙВСЁ</button>}
     </div>
   </div>
 })

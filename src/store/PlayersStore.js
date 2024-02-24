@@ -1,11 +1,11 @@
 import { makeAutoObservable } from "mobx";
+import { Actions } from "../consts/Actions";
 
 export class PlayersStore {
   logStore;
 
   players = [];
   currentPlayer = 0;
-  buffer = 0;
 
   constructor(logStore) {
     makeAutoObservable(this);
@@ -35,15 +35,12 @@ export class PlayersStore {
   }
 
   addMoney = (playerId, amount) => {
-    this.buffer = 0;
     this.players[playerId].balance += amount;
     this.logStore.logAddMoney(this.players[playerId], amount);
   }
 
-  // TODO: отмена перевода?
   sendMoney = (playerId, amount) => {
     this.removeMoney(playerId, amount, false);
-    this.buffer += amount;
     this.logStore.logSendMoney(this.players[playerId], amount);
   }
 
@@ -61,6 +58,34 @@ export class PlayersStore {
       alert(message);
       throw new Error(message)
     }
+  }
+
+  get _pendingTransfers() {
+    const log = this.logStore.logArray;
+    const index = log.findLastIndex(item => item.type !== Actions.SEND) + 1;
+
+    if (index > log.length) return 0;
+
+    return log.slice(index, log.length);
+  }
+
+  get amountToTransfer() {
+    const sendActions = this._pendingTransfers;
+
+    return sendActions.reduce((acc, action) => acc + action.amount, 0);
+  }
+
+  undo = () => {
+    const sendActions = this._pendingTransfers;
+    const amount = this.amountToTransfer;
+
+    sendActions.forEach(action => {
+      const playerId = this.players.findIndex(player => player.name === action.player.name);
+
+      this.players[playerId].balance += action.amount;
+    });
+
+    this.logStore.logUndo(amount);
   }
 
   bankruptPlayer = (playerId) => {
