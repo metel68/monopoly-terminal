@@ -2,6 +2,7 @@ import { observer } from "mobx-react-lite";
 
 import './Player.css'
 import { useCallback } from "react";
+import classNames from "classnames";
 
 const { format } = Intl.NumberFormat();
 
@@ -45,13 +46,9 @@ export const Player = observer(({ playerStore, id, player, active }) => {
     }
   }, [id, playerStore, player]);
 
-  return <div className={active ? 'player active' : 'player'}>
-    <div className="text">
-      {active && '> '}
-      {player.name}
-    </div>
-
+  return <div className={classNames('player', { active }, player.className)}>
     <div className="balance">
+      {active && '> '}
       {format(player.balance)}k
     </div>
 

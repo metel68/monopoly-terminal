@@ -1,0 +1,20 @@
+button {
+  min-width: 28px;
+  font-size: 22px;
+}
+
+.log-item .red {
+  color: darkred;
+}
+
+.log-item .green {
+  color: darkgreen;
+}
+
+.log-item .blue {
+  color: darkblue;
+}
+
+.log-item .yellow {
+  color: goldenrod;
+}

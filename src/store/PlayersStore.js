@@ -15,14 +15,14 @@ export class PlayersStore {
 
   start = (playerCount) => {
     if (playerCount < 2 || playerCount > 4) {
-      throw new Error('Допускается от 2 до 4 игроков!');
+      throw new Error("Допускается от 2 до 4 игроков!");
     }
 
     this.logStore.clear();
 
-    const playerNames = ['Красный', "Синий", "Зеленый", "Желтый"];
+    const players = [{ name: "Красный", className: "red" }, { name: "Синий", className: "blue"}, { name: "Зеленый", className: "green"}, { name: "Желтый", className: "yellow"}];
 
-    this.players = playerNames.slice(0, playerCount).map((name) => ({ name, balance: 15000 }));
+    this.players = players.slice(0, playerCount).map((player) => ({ name: player.name, balance: 15000, className: player.className }));
     this.currentPlayer = Math.floor(Math.random() * playerCount);
   }
 

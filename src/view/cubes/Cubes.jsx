@@ -20,7 +20,7 @@ export const Cubes = () => {
   const generate = () => {
     setDig1(randomness[i] % 6 + 1);
     setDig2(randomness[i + 1] % 6 + 1);
-    setIndex((i) => i+2);
+    setIndex((i) => i + 2);
 
     if (i + 2 >= randomness.length) {
       generateRandomness();
@@ -31,9 +31,9 @@ export const Cubes = () => {
   return <div>
     {dig1 > 0 && <div className="cubes-container">
       <div className="cube">{dig1}</div>
-      +
+      <div className="sign"> + </div>
       <div className="cube">{dig2}</div>
-      =
+      <div className="sign"> = </div>
       <div className={dig1 === dig2 ? "cube double" : "cube"}>{dig1 + dig2}</div>
     </div>}
     <button onClick={generate}>Бросить кубики</button>
