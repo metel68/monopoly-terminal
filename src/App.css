@@ -37,4 +37,21 @@ button {
   grid-area: Log;
   border: 1px solid gray;
   padding: 16px;
+  overflow: auto;
 }
+
+@media (max-width: 900px) {
+  .grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .players {
+    position: sticky;
+  }
+
+  .log {
+    flex: 1;
+  }
+}
+

@@ -12,9 +12,9 @@ function App() {
   return (
     <div className="app">
       <div className="grid">
-        <div className="players"><Players playerStore={playersStore} /></div>
-        <div className="cubes"><Cubes /></div>
-        <div className="log"><Log logStore={logStore} /></div>
+        <div className="players"><Players playerStore={playersStore}/></div>
+        <div className="log"><Log logStore={logStore}/></div>
+        <div className="cubes"><Cubes/></div>
       </div>
     </div>
   );
